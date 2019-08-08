@@ -66,27 +66,30 @@ public class MazeMaker {
 				selectNextPath(currentCell);
 			}
 		}
+
 	}
 
 	// 7. Complete the remove walls method.
 	// This method will check if c1 and c2 are adjacent.
 	// If they are, the walls between them are removed.
 	private static void removeWalls(Cell c1, Cell c2) {
-		if ((Math.abs(c1.getX() - c2.getX()) + Math.abs(c1.getY() - c2.getY())) == 1) {
-			if (c1.getX() - c2.getX() == 1) {
-				c1.setEastWall(false);
-				c2.setWestWall(false);
-			} else if (c1.getX() - c2.getX() == -1) {
-				c2.setEastWall(false);
-				c1.setWestWall(false);
-			} else if (c1.getY() - c2.getY() == 1) {
-				c1.setNorthWall(false);
-				c2.setSouthWall(false);
-			} else {
-				c2.setNorthWall(false);
-				c1.setSouthWall(false);
-			}
+		if (c1.getX() - c2.getX() == 1) {
+			c2.setEastWall(false);
+			c1.setWestWall(false);
 		}
+		if (c1.getX() - c2.getX() == -1) {
+			c1.setEastWall(false);
+			c2.setWestWall(false);
+		}
+		if (c1.getY() - c2.getY() == 1) {
+			c1.setNorthWall(false);
+			c2.setSouthWall(false);
+		}
+		if (c1.getY() - c2.getY() == -1) {
+			c2.setNorthWall(false);
+			c1.setSouthWall(false);
+		}
+
 	}
 
 	// 8. Complete the getUnvisitedNeighbors method

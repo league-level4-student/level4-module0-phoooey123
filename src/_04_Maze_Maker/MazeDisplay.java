@@ -38,5 +38,6 @@ public class MazeDisplay extends JPanel {
 
 	public static void main(String[] args) {
 		MazeDisplay md = new MazeDisplay();
+		
 	}
 }
