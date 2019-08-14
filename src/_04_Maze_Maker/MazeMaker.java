@@ -11,6 +11,8 @@ public class MazeMaker {
 
 	private static Maze maze;
 
+	static boolean run = false;
+	
 	private static Random randGen = new Random();
 	private static Stack<Cell> uncheckedCells = new Stack<Cell>();
 	static boolean hasUnvisited;
@@ -25,7 +27,6 @@ public class MazeMaker {
 		int y = randGen.nextInt(maze.getHeight());
 		// 5. call selectNextPath method with the randomly selected cell
 		selectNextPath(maze.getCell(x, y));
-
 		return maze;
 	}
 
@@ -89,7 +90,13 @@ public class MazeMaker {
 			c2.setNorthWall(false);
 			c1.setSouthWall(false);
 		}
+		if (!run) {
 
+			maze.cells[0][randGen.nextInt(maze.cells.length - 1)].setWestWall(false);
+			maze.cells[maze.cells.length - 1][randGen.nextInt(maze.cells.length - 1)].setEastWall(false);
+
+			run = true;
+		}
 	}
 
 	// 8. Complete the getUnvisitedNeighbors method
