@@ -49,38 +49,63 @@ public class TheWrongWayCow {
   public static int[] findWrongWayCow(final char[][] field) {
       // Fill in the code to return the x,y coordinate position of the
       // head (letter 'c') of the wrong way cow!
-	  int north = 0;
 	  int east = 0;
-	  int south = 0;
+	  int north = 0;
 	  int west = 0;
+	  int south = 0;
 	 HashMap<String, int[]>  coords = new HashMap<String, int[]>();
-      for (int i = 0; i < field.length; i++) {
-		for (int j = 0; j < field[i].length; j++) {
-			if(field[i][j] == 'c') {
-				if(field[i+1][j] == 'o' && field[i+2][j] == 'w') {
-					west++;
-					int[] w = {i , j};
-					coords.put("west", w);
+      for (int y = 0; y < field.length; y++) {
+		for (int x = 0; x < field[y].length; x++) {
+			if(field[y][x] == 'c') {
+				if(!((y+1 == field.length) || (y+2 == field.length)) && field[y+1][x] == 'o' && field[y+2][x] == 'w') {
+					north++;
+					int[] w = {x , y};
+					coords.put("north", w);
 				}
-				else if(j < field[i].length - 3 && field[i][j+1] == 'o' && field[i][j+2] == 'w') {
-					south++;
+				else if(x <= field[y].length - 3 && field[y][x+1] == 'o' && field[y][x+2] == 'w') {
+					west++;
+					int[] s = {x, y};
+					coords.put("west", s);
 				}
 			}
-			else if(field[i][j] == 'w') {
-				if(i > 2 && field[i-1][j] == 'o' && field[i-2][j] == 'c') {
-					east++;
+			else if(field[y][x] == 'w') {
+				if(!((y+1 == field.length) || (y+2 == field.length)) && y > 2 && field[y+1][x] == 'o' && field[y+2][x] == 'c') {
+					south++;
+					int[] e = {x, y+2};
+					coords.put("south", e);
 				}
-				else if(j < field[i].length - 3 && field[i][j+1] == 'o' && field[i][j+2] == 'c') {
-					north++;
+				else if(x < field[y].length - 3 && field[y][x+1] == 'o' && field[y][x+2] == 'c') {
+					east++;
+					int[] n = {x+2, y};
+					coords.put("east", n);
 				}
 			}
 			
 		}
 	}
-      System.out.println(north);
-      System.out.println(east);
-      System.out.println(south);
-      System.out.println(west);
-      return null;
+      System.out.println(east + " east");
+      System.out.println(north + " north");
+      System.out.println(west + " west");
+      System.out.println(south + " south");
+      if(east == 1) {
+    	  System.out.println(coords.get("east")[0]);
+    	  System.out.println(coords.get("east")[1]);
+    	  return coords.get("east");
+      }
+      else if(north == 1) {
+    	  System.out.println(coords.get("north")[0]);
+    	  System.out.println(coords.get("north")[1]);
+    	  return coords.get("north");
+      }
+      else if(west == 1) {
+    	  System.out.println(coords.get("west")[0]);
+    	  System.out.println(coords.get("west")[1]);
+    	  return coords.get("west");
+      }
+      else {
+    	  System.out.println(coords.get("south")[0]);
+    	  System.out.println(coords.get("south")[1]);
+    	  return coords.get("south");
+      }
   }
 }
